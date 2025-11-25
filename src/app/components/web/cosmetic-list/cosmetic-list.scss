@@ -1,0 +1,19 @@
+.container{
+  min-height: 70vh;
+}
+//.list-group-item{
+//  cursor: pointer;
+//  &:hover{
+//    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+//  }
+//}
+.spinner-border{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5rem;
+  height: 5rem;
+}
+.card:hover{
+  border: 2px solid #000;
+}
