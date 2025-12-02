@@ -43,7 +43,7 @@ export class CosmeticList implements OnInit {
       next: value => {
         this.cosmeticResponse = value;
         this.cosmeticList.set(value.cosmeticos.cosmeticos);
-        console.log(value)
+        // console.log(value)
         this.showPagination = true;
       },
       error: error => console.error(error)
@@ -89,16 +89,13 @@ export class CosmeticList implements OnInit {
 
   protected modalCosmetic(cosmetico?: Cosmetico) {
     const modalRef = this.modalService.open(CosmeticEdit);
-    modalRef.componentInstance.editar = false;
-    if (cosmetico) {
-      modalRef.componentInstance.editar = true;
-      modalRef.componentInstance.cosmetico = cosmetico;
-    }
+    modalRef.componentInstance.editar = !!cosmetico;
+    if (cosmetico) modalRef.componentInstance.cosmetico = cosmetico;
+
     modalRef.result.then(() => {
       this.loadCosmetics()
     }).catch(error => {
       console.error(error)
-      this.loadCosmetics()
     });
   }
 

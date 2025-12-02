@@ -1,4 +1,49 @@
-.modal-dialog{
+.modal-dialog {
   margin: 0;
 
+}
+
+//* .ng-valid    Valido
+//* .ng-invalid  Invalido
+//* .ng-pending  Pendiente
+//* .ng-pristine Inicial
+//* .ng-dirty  Sucio
+//* .ng-untouched   No tocado
+//* .ng-touched   Tocado
+//* .ng-submitted (enclosing form element only) Enviado
+
+/* 1. REGLAS PARA EL ESTADO VÁLIDO (¡VERDE REFORZADO!) */
+
+.form-control.ng-valid.ng-touched,
+.form-control.ng-valid.ng-dirty {
+  //border-color: #42A948 !important;
+  border-bottom: 5px solid #42A948 !important;
+
+  //box-shadow: 0 0 0 0.25rem rgba(66, 169, 72, 0.25) !important;
+}
+
+/* 2. REGLAS PARA EL ESTADO INVÁLIDO (ROJO) */
+
+.form-control.ng-invalid.ng-touched {
+  //border-color: #e34c49 !important;
+  //box-shadow: 0 0 0 0.25rem rgba(227, 76, 73, 0.25) !important;
+  border-bottom: 5px solid #e34c49;
+}
+
+//.ng-invalid .ng-touched {
+//  border-bottom: 5px solid #e34c49;
+//}
+
+/* 3. REGLAS PARA EL LABEL  */
+// ? Mas estricto , por si fallara en otro a futuro
+//  .form-floating .form-control.ng-valid.ng-touched ~ label,
+//  .form-floating .form-control.ng-valid.ng-dirty ~ label {
+//  color: #42A948 !important;
+//  }
+
+.form-floating .form-control.ng-valid ~ label {
+  color: #42A948 !important;
+}
+.form-floating .form-control.ng-invalid.ng-touched  ~ label {
+  color: #e34c49;
 }

@@ -18,4 +18,20 @@ export class FormValidators {
     }
   }
 
+  // diferencia con Validators.min() que permite valores decimales .min() solo enteros
+  static minValue(value: number): ValidationErrors | null {
+    return (control: FormControl): ValidationErrors | null => {
+      if (control.value < value) return {minValue: true};
+      else return null;
+    }
+  }
+
+  // al declararlo FormValidators.allowedExtension(new RegExp( /.jpg$|.jpeg$|.png$/i))
+  static allowedExtension(regex: RegExp): ValidationErrors | null {
+    return (control: FormControl): ValidationErrors | null => {
+      const allowed: boolean = regex.test(control.value);
+      return allowed ? null : {allowedExtension: true};
+    }
+  }
+
 }

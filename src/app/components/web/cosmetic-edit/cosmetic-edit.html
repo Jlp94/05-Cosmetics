@@ -4,11 +4,11 @@
       <h5 class="modal-title" id="miModalLabel">
         {{ editar ? 'Editar ' + name?.value : 'Nuevo Cósmetico' }}
       </h5>
-      <button class="btn-close" type="button" (click)="activeModal.dismiss()" aria-label="CLose"></button>
+      <button class="btn-close" type="button" (click)="activeModal.close()" aria-label="CLose"></button>
     </div>
 
     <div class="modal-body">
-      <form [formGroup]="formCosmetic" (ngSubmit)="onSubmit()">
+      <form [formGroup]="formCosmetic" (ngSubmit)="onSubmit()" ><!-- class="needs-validation was-validated" novalidate -->
         <div class="form-floating mb-3">
           <input
             formControlName="name"
@@ -17,9 +17,10 @@
             type="text"
             class="form-control"
             required>
-          <label for="nombre">Nombre</label>
+          <label for="nombre" class="form-label">Nombre</label>
           @if (name && name.invalid && (name?.dirty || name?.touched)) {
-            <div class="text-danger">
+            <div class="small text-danger">
+              <small>
               @if (name.errors && name.errors['required']) {
                 <i class="bi bi-exclamation-triangle-fill"></i>
                El nombre es obligatorio!
@@ -35,6 +36,7 @@
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 {{ name.errors['forbiddenNames'].value }} esa palabra esta prohibida
               }
+              </small>
             </div>
           }
         </div>
@@ -48,7 +50,8 @@
             required>
           <label for="type">Tipo</label>
           @if (type && type.invalid && (type?.dirty || type?.touched)) {
-            <div class="text-danger">
+            <div class="small text-danger">
+              <small>
               @if (type.errors && type.errors['required']) {
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 El tipo es obligatorio!
@@ -65,6 +68,7 @@
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 {{ type.errors['forbiddenNames'].value }} esa palabra esta prohibida
               }
+              </small>
             </div>
           }
         </div>
@@ -78,7 +82,8 @@
             required>
           <label for="brand">Marca</label>
           @if (brand && brand.invalid && (brand?.dirty || brand?.touched)) {
-            <div class="text-danger">
+            <div class="small text-danger">
+              <small>
               @if (brand.errors && brand.errors['required']) {
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 La marca es obligatoria!
@@ -95,6 +100,7 @@
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 {{ brand.errors['forbiddenNames'].value }} esa palabra esta prohibida
               }
+              </small>
             </div>
           }
         </div>
@@ -107,7 +113,8 @@
                  placeholder="Precio" required>
           <label for="price">Precio</label>
           @if (price && price.invalid && (price?.dirty || price?.touched)) {
-            <div class="text-danger">
+            <div class="small text-danger">
+                <small>
               @if (price.errors && price.errors['required']) {
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 El precio es obligatorio!
@@ -116,6 +123,7 @@
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 El precio no puede ser negativo
               }
+                </small>
             </div>
           }
         </div>
@@ -129,25 +137,30 @@
                      placeholder="Imagen">
               <label for="image">Imagen</label>
               @if (image && image.invalid && (image?.dirty || image?.touched)) {
-                <div class="text-danger">
+                <div class="small text-danger">
+                  <small>
                   @if (image.errors && image.errors['required']) {
                     <i class="bi bi-exclamation-triangle-fill"></i>
                     La imagen es obligatoria!
                   }
+                  </small>
                 </div>
               }
             </div>
           </div>
-          <div class="col-3 border rounded p-0">
+          <div class="col-3 border rounded p-0"
+               [ngClass]="{
+          'border-danger': image && image.invalid && (image?.dirty || image?.touched),
+          'border-success' :image.valid
+          }">
             <img [src]="image?.value || imgNotFound" class="img-fluid p-1 rounded">
           </div>
         </div>
-        <!--SELECT GENRES-->
 
       </form>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline-danger me-2" type="button" (click)="activeModal.dismiss()">Close</button>
+      <button class="btn btn-outline-danger me-2" type="button" (click)="activeModal.close()">Close</button>
       <button class="btn btn-primary" type="submit" [disabled]="formCosmetic.invalid" (click)="onSubmit()">Save</button>
     </div>
   </div>

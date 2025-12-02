@@ -5,11 +5,13 @@ import {ToastService} from '../../../services/toast-service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormValidators} from '../../../validators/FormValidators';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-cosmetic-edit',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgClass
   ],
   templateUrl: './cosmetic-edit.html',
   styleUrl: './cosmetic-edit.scss',
@@ -24,6 +26,7 @@ export class CosmeticEdit implements OnInit {
   private readonly cosmeticService: CosmeticService = inject(CosmeticService);
   protected readonly toastService: ToastService = inject(ToastService);
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
+
 
   formCosmetic: FormGroup = this.formBuilder.group({
     _id: [''], // strings
@@ -81,7 +84,7 @@ export class CosmeticEdit implements OnInit {
         next: response => {
           this.showValid(response.message)
           console.log(response.message);
-          this.activeModal.dismiss();
+          this.activeModal.close();
         },
         error: err => console.error(err)
       })
